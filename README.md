@@ -1,6 +1,6 @@
 # VisualDomainDecathlon
 
-### Prerequisites
+## Prerequisites
 
 Install the following:
 
@@ -16,15 +16,15 @@ Then, install python packages:
 pip install -r requirements.txt
 ```
 
-### Datasets
+## Datasets
 
-#####Download
+####Download
 
 Download [Visual Domain Decathlon](https://www.robots.ox.ac.uk/~vgg/decathlon/#download) Datasets except(ImageNet), [Caltech256, CIFAR-10, Sketches](www.google.com) and move 12 datasets to **$DIR/decathlon-1.0-data**.
 
 We have rearranged the format of all datasets to suit torchvision.
 
-##### Dataset Shrink
+#### Dataset Shrink
 
 ```
 cd $DIR/decathlon-1.0-data
@@ -34,16 +34,16 @@ python dataset_shrink.py --save-dir decathlon-1.0-data-tenth --shrink-ratio 10
 python dataset_shrink.py --save-dir decathlon-1.0-data-hundredth --shrink-ratio 100
 ```
 
-### Training
+## Training
 
-##### Baseline
+#### Baseline
 
 ```
 cd $DIR/src
 python decathlon_baseline.py --data-dir decathlon-1.0-data --log-dir log_save --model-save-dir model_weights --depth 28 --widen-factor 1 
 ```
 
-### Finetune
+## Finetune
 
 | Train Dataset | Finetune |                           Command                            |
 | :-----------: | :------: | :----------------------------------------------------------: |
@@ -52,11 +52,11 @@ python decathlon_baseline.py --data-dir decathlon-1.0-data --log-dir log_save --
 |      10%      | Fc layer | python decathlon_transfer.py --data-dir decathlon-1.0-data-tenth --transfer-result-dir transfer_result_fc_all_tenth --fc |
 |      10%      |   All    | python decathlon_transfer.py --data-dir decathlon-1.0-data-tenth --transfer-result-dir transfer_result_all_tenth --fc |
 
-### Acknowledgement
+## Acknowledgement
 
 We thank [Mtan](https://github.com/lorenmt/mtan) for providing some source codes.
 
-### Contact
+## Contact
 
 chenyix@zju.edu.cn
 
