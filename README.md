@@ -18,8 +18,6 @@ pip install -r requirements.txt
 
 ## Datasets
 
-###Download
-
 Download [Visual Domain Decathlon](https://www.robots.ox.ac.uk/~vgg/decathlon/#download) Datasets except(ImageNet), [Caltech256, CIFAR-10, Sketches](www.google.com) and move 12 datasets to **$DIR/decathlon-1.0-data**.
 
 We have rearranged the format of all datasets to suit torchvision.
