@@ -24,7 +24,7 @@ def main():
     parser.add_argument('--log-dir', dest='log_dir', type=str)
     parser.set_defaults(log_dir='log_save')
 
-    parser.add_argument('--model_save_dir', dest='model_save_dir', type=str)
+    parser.add_argument('--model-save-dir', dest='model_save_dir', type=str)
     parser.set_defaults(model_save_dir='model_weights')
 
     # network
@@ -62,7 +62,6 @@ def main():
     epoch_step = json.loads(args.lr_step)
     prj_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
     log_dir = os.path.join(prj_dir, args.log_dir)
-    model_weight_path = os.path.join(prj_dir, args.model_weight_path)
     model_save_dir = os.path.join(prj_dir, args.model_save_dir)
     data_dir = os.path.join(prj_dir, args.data_dir)
 
@@ -99,7 +98,8 @@ def main():
         optimizer = optim.SGD(WideResNet_ins.parameters(), lr=args.lr, weight_decay=args.weight_decay, nesterov=True, momentum=0.9)
         scheduler = optim.lr_scheduler.MultiStepLR(optimizer, epoch_step, gamma=args.lr_drop_ratio)
 
-        if model_weight_path is not None:
+        if args.model_weight_path is not None:
+            model_weight_path = os.path.join(prj_dir, args.model_weight_path)
             WideResNet_ins.load_state_dict(torch.load(model_weight_path))
             print('[*]Model loaded : ({})'.format(os.path.basename(model_weight_path)))
 
@@ -159,6 +159,9 @@ def main():
                   .format(index, data_name[i], avg_cost[index, i, 0], avg_cost[index, i, 1],
                           avg_cost[index, i, 2], avg_cost[index, i, 3], (time.time()-time_epoch)//60, (time.time()-time_epoch)%60))
             print('='*100)
+
+            if not os.path.exists(os.path.join(model_save_dir, 'baseline')):
+                os.mkdir(os.path.join(model_save_dir, 'baseline'))
 
             if not os.path.exists(os.path.join(model_save_dir, 'baseline', data_name[i])):
                 os.mkdir(os.path.join(model_save_dir, 'baseline', data_name[i]))

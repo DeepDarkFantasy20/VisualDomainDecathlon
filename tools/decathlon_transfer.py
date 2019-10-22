@@ -21,7 +21,7 @@ def main():
     parser.set_defaults(data_dir='decathlon-1.0-data')
 
     parser.add_argument('--model-weight-dir', dest='model_weight_dir', type=str)
-    parser.set_defaults(model_weight_path='model_weights')
+    parser.set_defaults(model_weight_dir='model_weights')
 
     parser.add_argument('--transfer-result-dir', dest='transfer_result_dir', type=str)
     parser.set_defaults(transfer_result_dir='transfer_result_fc_all')

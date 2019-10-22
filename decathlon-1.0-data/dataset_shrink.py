@@ -7,7 +7,7 @@ import random
 parser = argparse.ArgumentParser('Dataset shrinking')
 
 parser.add_argument('--save-dir', dest='save_dir', type=str)
-parser.set_defaults(shrink_dir='decathlon-1.0-data-tenth')
+parser.set_defaults(save_dir='decathlon-1.0-data-tenth')
 
 parser.add_argument('--shrink-ratio', dest='shrink_ratio', type=int)
 parser.set_defaults(shrink_ratio=10)
@@ -58,3 +58,4 @@ for i in range(len(data_name)):
 	os.system('cp -r {} {}'.format(os.path.join(dataset, 'test'), os.path.join(prj_dir, dirname, dataset)))
 
 	print('{} train:{}'.format(dataset, sel_num))
+os.system('cp {} {}'.format('decathlon_mean_std_plus.pickle', os.path.join(prj_dir, dirname)))

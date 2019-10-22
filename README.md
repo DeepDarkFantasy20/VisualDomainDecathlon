@@ -28,8 +28,6 @@ We have rearranged the format of all datasets to suit torchvision.
 cd $DIR/decathlon-1.0-data
 # 1/10 size
 python dataset_shrink.py --save-dir decathlon-1.0-data-tenth --shrink-ratio 10
-# 1/100 size
-python dataset_shrink.py --save-dir decathlon-1.0-data-hundredth --shrink-ratio 100
 ```
 
 ## Training
