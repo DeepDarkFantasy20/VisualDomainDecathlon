@@ -66,6 +66,13 @@ def main():
     model_save_dir = os.path.join(prj_dir, args.model_save_dir)
     data_dir = os.path.join(prj_dir, args.data_dir)
 
+    if not os.path.exists(log_dir):
+        os.mkdir(log_dir)
+    if not os.path.exists(model_save_dir):
+        os.mkdir(model_save_dir)
+    if not os.path.exists(data_dir):
+        os.mkdir(data_dir)
+
     data_name = ['cifar100', 'aircraft', 'daimlerpedcls', 'dtd', 'gtsrb', 'omniglot',
                  'svhn', 'ucf101', 'vgg-flowers', 'cifar10', 'caltech256', 'sketches']
 

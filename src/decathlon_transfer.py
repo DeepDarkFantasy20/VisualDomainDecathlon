@@ -125,16 +125,18 @@ def main():
             # load src's model params
             if model_weight_dir is not None:
                 if args.fc:
-                    pretrained_dict = torch.load(os.path.join(model_weight_dir, src,
+                    pretrained_dict = torch.load(os.path.join(model_weight_dir, 'baseline', src,
                                                               'wideresnet{}_{}_final.pt'.format(args.depth, args.widen_factor)))
                     model_dict = WideResNet_ins.state_dict()
                     pretrained_dict = {k_: v_ for k_, v_ in pretrained_dict.items() if k_ != 'linear.0.weight' and k_ != 'linear.0.bias'}
                     model_dict.update(pretrained_dict)
                     WideResNet_ins.load_state_dict(model_dict)
                 else:
-                    WideResNet_ins.load_state_dict(torch.load(os.path.join(model_weight_dir, src,
+                    WideResNet_ins.load_state_dict(torch.load(os.path.join(model_weight_dir, 'baseline', src,
                                                               'wideresnet{}_{}_final.pt'.format(args.depth, args.widen_factor))))
                 print('[*] Loaded {} ==> {}'.format(src, data_name[i]))
+            else:
+                raise IOError('Transfer must have source!')
 
             print('Start Finetuning DATASET:{} from Pretrained-MODEL:{}'.format(data_name[i], src))
             time_onedataset = time.time()
@@ -201,7 +203,7 @@ def main():
             torch.save(WideResNet_ins.state_dict(), os.path.join(transfer_result_dir, data_name[i], src, 'wideresnet{}_{}_final.pt'.format(args.depth, args.widen_factor)))
             print('DATASET: {:s} Finetuned from {:s} : Time consumed: {:.2f} minutes {:.2f} seconds'.format(data_name[i], src, (time.time()-time_onedataset)//60, (time.time()-time_onedataset)%60))
             cost_ = avg_cost[:, i, k, :]
-            np.save(os.path.join(transfer_result_dir, data_name[i], src, 'cost_fc.npy'), cost_)
+            np.save(os.path.join(transfer_result_dir, data_name[i], src, 'cost.npy'), cost_)
 
     np.save(os.path.join(transfer_result_dir, trainlog_save), avg_cost)
 
